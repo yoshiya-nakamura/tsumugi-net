@@ -1,0 +1,18 @@
+---
+import { getBlogs } from "../library/microcms";
+const response = await getBlogs({ fields: ["id", "title"] });
+---
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Astro × microCMS</title>
+  </head>
+  <body>
+    <h1>記事一覧</h1>
+    <ul>
+      {response.contents.map((blog) => (
+        <li>{blog.title}</li>
+      ))}
+    </ul>
+  </body>
+</html>
