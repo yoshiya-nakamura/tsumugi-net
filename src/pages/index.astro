@@ -1,341 +1,187 @@
 ---
-import { createClient } from "microcms-js-sdk";
+import Layout from "../layouts/Layout.astro";
 
-// microCMSから「お知らせ（news）」を取得（※エンドポイント名が blogs 等の場合はここを変更）
-const client = createClient({
-  serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
-  apiKey: import.meta.env.MICROCMS_API_KEY,
-});
-
-let newsList: any[] = [];
-try {
-  // エンドポイント名に合わせて "news" や "blogs" を指定してください
-  const response = await client.get({ endpoint: "blogs", queries: { limit: 5 } });
-  newsList = response.contents;
-} catch (e) {
-  console.error("microCMS取得エラー（エンドポイント名を確認してください）:", e);
-}
+const latestNews = [
+  { date: "2026.11.15", category: "お知らせ", title: "公式コーポレートサイトを公開いたしました。" },
+  { date: "2026.11.01", category: "プレス", title: "株式会社つむぎネットを設立いたしました。" },
+];
 ---
 
-<!doctype html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>株式会社つむぎネット | コーポレートサイト</title>
-    <meta name="description" content="株式会社つむぎネットの公式コーポレートサイトです。" />
-  </head>
-  <body>
-    <!-- ヘッダー -->
-    <header class="header">
-      <div class="container header-inner">
-        <a href="#" class="logo">TSUMUGI NET</a>
-        <nav class="nav">
-          <a href="#service">事業内容</a>
-          <a href="#news">お知らせ</a>
-          <a href="#company">会社概要</a>
-          <a href="#contact" class="nav-btn">お問い合わせ</a>
-        </nav>
+<Layout title="株式会社つむぎネット | コーポレートサイト">
+  <!-- ヒーローエリア -->
+  <section class="hero">
+    <div class="container">
+      <p class="hero-sub">CORPORATE SITE</p>
+      <h1>テクノロジーで、<br class="sp-only" />ビジネスに確かな価値を。</h1>
+      <p class="hero-desc">
+        株式会社つむぎネットは、シンプルで本質的なITソリューションを通じて<br class="pc-only" />
+        お客様の事業成長と業務効率化を支援します。
+      </p>
+    </div>
+  </section>
+
+  <!-- 事業内容ダイジェスト -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="en">SERVICE</span>
+        <h2>事業内容</h2>
       </div>
-    </header>
-
-    <main>
-      <!-- メインビジュアル -->
-      <section class="hero">
-        <div class="container">
-          <h1>シンプルに、確かな価値を。</h1>
-          <p>IT・Webの力でビジネスの課題解決と成長を支援します。</p>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <h3>Webシステム・サイト企画開発</h3>
+          <p>高速・高セキュリティなモダンWeb技術を用い、コーポレートサイトからWebアプリまで設計・開発します。</p>
         </div>
-      </section>
-
-      <!-- 事業内容 -->
-      <section id="service" class="section">
-        <div class="container">
-          <h2>事業内容</h2>
-          <div class="grid">
-            <div class="card">
-              <h3>Webサイト企画・制作</h3>
-              <p>高速でセキュアなモダンWebサイトの設計・開発から運用保守まで一貫して対応します。</p>
-            </div>
-            <div class="card">
-              <h3>IT・業務効率化支援</h3>
-              <p>クラウドツールやAIを活用した業務フローの改善・システム導入をサポートします。</p>
-            </div>
-          </div>
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <h3>IT・DX推進コンサルティング</h3>
+          <p>クラウドツールやAI活用など、小規模組織・法人の業務プロセスを最適化する仕組みづくりを支援します。</p>
         </div>
-      </section>
-
-      <!-- お知らせ（microCMS連携） -->
-      <section id="news" class="section bg-gray">
-        <div class="container">
-          <h2>お知らせ</h2>
-          {newsList.length > 0 ? (
-            <ul class="news-list">
-              {newsList.map((item) => (
-                <li>
-                  <time>{new Date(item.publishedAt || item.createdAt).toLocaleDateString("ja-JP")}</time>
-                  <span>{item.title}</span>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p class="empty-text">現在お知らせはありません。</p>
-          )}
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <h3>デジタルコンテンツ運営</h3>
+          <p>自社メディアおよび各種デジタルプロダクトの企画・開発・運営を行っています。</p>
         </div>
-      </section>
-
-      <!-- 会社概要 -->
-      <section id="company" class="section">
-        <div class="container">
-          <h2>会社概要</h2>
-          <dl class="company-table">
-            <dt>会社名</dt>
-            <dd>株式会社つむぎネット（仮）</dd>
-
-            <dt>所在地</dt>
-            <dd>〒810-0001 福岡県福岡市中央区〇〇 1-2-3</dd>
-
-            <dt>代表者</dt>
-            <dd>代表取締役 〇〇 〇〇</dd>
-
-            <dt>設立</dt>
-            <dd>2026年〇月</dd>
-
-            <dt>事業内容</dt>
-            <dd>Webサイトの企画・開発・運用 / ITコンサルティング</dd>
-          </dl>
-        </div>
-      </section>
-
-      <!-- お問い合わせ -->
-      <section id="contact" class="section bg-gray">
-        <div class="container contact-box">
-          <h2>お問い合わせ</h2>
-          <p>お仕事のご依頼・ご相談は下記メールアドレスまでお気軽にご連絡ください。</p>
-          <a href="mailto:info@tsumugi-net.com" class="mail-btn">info@tsumugi-net.com</a>
-        </div>
-      </section>
-    </main>
-
-    <!-- フッター -->
-    <footer class="footer">
-      <div class="container">
-        <p>&copy; {new Date().getFullYear()} tsumugi-net.com All Rights Reserved.</p>
       </div>
-    </footer>
-  </body>
-</html>
+      <div class="more-wrap">
+        <a href="/service" class="more-link">事業内容の詳細を見る &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Informationダイジェスト -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="section-head">
+        <span class="en">INFORMATION</span>
+        <h2>お知らせ</h2>
+      </div>
+      <ul class="info-list">
+        {latestNews.map((item) => (
+          <li class="info-item">
+            <div class="info-meta">
+              <time>{item.date}</time>
+              <span class="badge">{item.category}</span>
+            </div>
+            <p class="info-title">{item.title}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="more-wrap">
+        <a href="/info" class="more-link">お知らせ一覧を見る &rarr;</a>
+      </div>
+    </div>
+  </section>
+</Layout>
 
 <style>
-  /* ベース設定 */
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  html {
-    scroll-behavior: smooth;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif;
-    color: #1e293b;
-    line-height: 1.7;
-  }
-  .container {
-    max-width: 880px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  /* ヘッダー */
-  .header {
-    background: #ffffff;
-    border-bottom: 1px solid #e2e8f0;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  .header-inner {
-    height: 64px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .logo {
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: #0f172a;
-    text-decoration: none;
-    letter-spacing: 0.05em;
-  }
-  .nav {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    font-size: 0.9rem;
-  }
-  .nav a {
-    color: #475569;
-    text-decoration: none;
-  }
-  .nav a:hover {
-    color: #0f172a;
-  }
-  .nav-btn {
-    background: #0f172a;
-    color: #ffffff !important;
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-weight: 500;
-  }
-
-  /* メインビジュアル */
   .hero {
-    padding: 96px 0;
-    background: #f8fafc;
+    padding: 110px 0 100px;
+    background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
     border-bottom: 1px solid #e2e8f0;
-    text-align: center;
+  }
+  .hero-sub {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #1d4ed8;
+    margin-bottom: 14px;
   }
   .hero h1 {
-    font-size: 2rem;
+    font-size: 2.35rem;
+    font-weight: 700;
     color: #0f172a;
-    margin-bottom: 16px;
-    letter-spacing: 0.02em;
+    line-height: 1.35;
+    margin-bottom: 20px;
   }
-  .hero p {
-    color: #475569;
+  .hero-desc {
     font-size: 1.05rem;
+    color: #475569;
   }
-
-  /* 共通セクション */
-  .section {
-    padding: 72px 0;
-  }
-  .bg-gray {
-    background: #f8fafc;
-  }
-  h2 {
-    font-size: 1.4rem;
-    color: #0f172a;
-    margin-bottom: 32px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #0f172a;
-    display: inline-block;
-  }
-
-  /* 事業内容 */
-  .grid {
+  .service-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
   }
-  .card {
+  .service-card {
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 24px;
+    border-radius: 10px;
+    padding: 28px 24px;
   }
-  .card h3 {
+  .service-num {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1d4ed8;
+    margin-bottom: 12px;
+  }
+  .service-card h3 {
     font-size: 1.1rem;
-    margin-bottom: 10px;
     color: #0f172a;
+    margin-bottom: 12px;
   }
-  .card p {
-    font-size: 0.95rem;
+  .service-card p {
+    font-size: 0.92rem;
     color: #475569;
   }
-
-  /* お知らせ */
-  .news-list {
+  .info-list {
     list-style: none;
     background: #ffffff;
     border: 1px solid #e2e8f0;
-    border-radius: 8px;
+    border-radius: 10px;
   }
-  .news-list li {
-    padding: 16px 20px;
-    border-bottom: 1px solid #e2e8f0;
+  .info-item {
     display: flex;
-    gap: 16px;
-    align-items: baseline;
+    align-items: center;
+    gap: 24px;
+    padding: 20px 28px;
+    border-bottom: 1px solid #e2e8f0;
   }
-  .news-list li:last-child {
+  .info-item:last-child {
     border-bottom: none;
   }
-  .news-list time {
-    font-size: 0.85rem;
+  .info-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+  .info-meta time {
+    font-size: 0.9rem;
     color: #64748b;
-    white-space: nowrap;
   }
-  .empty-text {
-    color: #64748b;
-    font-size: 0.95rem;
-  }
-
-  /* 会社概要テーブル */
-  .company-table {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    border-top: 1px solid #e2e8f0;
-  }
-  .company-table dt,
-  .company-table dd {
-    padding: 16px 12px;
-    border-bottom: 1px solid #e2e8f0;
-    font-size: 0.95rem;
-  }
-  .company-table dt {
+  .badge {
+    font-size: 0.75rem;
     font-weight: 600;
-    color: #334155;
-    background: #f8fafc;
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 3px 10px;
+    border-radius: 4px;
   }
-
-  /* お問い合わせ */
-  .contact-box {
-    text-align: center;
+  .sp-only {
+    display: none;
   }
-  .contact-box p {
-    margin-bottom: 24px;
-    color: #475569;
-  }
-  .mail-btn {
-    display: inline-block;
-    background: #0f172a;
-    color: #ffffff;
-    text-decoration: none;
-    padding: 14px 32px;
-    border-radius: 6px;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-  }
-  .mail-btn:hover {
-    opacity: 0.85;
-  }
-
-  /* フッター */
-  .footer {
-    padding: 32px 0;
-    text-align: center;
-    font-size: 0.85rem;
-    color: #64748b;
-    border-top: 1px solid #e2e8f0;
-  }
-
-  /* スマホ表示調整 */
-  @media (max-width: 600px) {
-    .nav a:not(.nav-btn) {
+  @media (max-width: 768px) {
+    .pc-only {
       display: none;
     }
-    .hero h1 {
-      font-size: 1.5rem;
+    .sp-only {
+      display: inline;
     }
-    .company-table {
+    .hero {
+      padding: 72px 0;
+    }
+    .hero h1 {
+      font-size: 1.65rem;
+    }
+    .service-grid {
       grid-template-columns: 1fr;
     }
-    .company-table dt {
-      padding-bottom: 4px;
-      border-bottom: none;
-    }
-    .company-table dd {
-      padding-top: 4px;
+    .info-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
     }
   }
 </style>

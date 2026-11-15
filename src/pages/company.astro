@@ -1,0 +1,83 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="会社概要 | 株式会社つむぎネット">
+  <div class="page-header">
+    <div class="container">
+      <span class="en">COMPANY</span>
+      <h1>会社概要</h1>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <dl class="company-list">
+        <div class="company-row">
+          <dt>会社名</dt>
+          <dd>株式会社つむぎネット</dd>
+        </div>
+        <div class="company-row">
+          <dt>設立</dt>
+          <dd>2026年11月</dd>
+        </div>
+        <div class="company-row">
+          <dt>代表者</dt>
+          <dd>代表取締役 〇〇 〇〇</dd>
+        </div>
+        <div class="company-row">
+          <dt>所在地</dt>
+          <dd>〒810-0001 福岡県福岡市中央区〇〇 1-2-3</dd>
+        </div>
+        <div class="company-row">
+          <dt>資本金</dt>
+          <dd>〇〇〇万円</dd>
+        </div>
+        <div class="company-row">
+          <dt>事業内容</dt>
+          <dd>
+            1. Webサイト・Webシステムの企画、設計、開発及び運営<br />
+            2. IT・DX推進に関するコンサルティング業務<br />
+            3. デジタルコンテンツの企画、制作及び販売
+          </dd>
+        </div>
+        <div class="company-row">
+          <dt>主要取引銀行</dt>
+          <dd>〇〇銀行 〇〇支店</dd>
+        </div>
+        <div class="company-row">
+          <dt>コーポレートURL</dt>
+          <dd>https://tsumugi-net.com/</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .company-list {
+    border-top: 1px solid #cbd5e1;
+  }
+  .company-row {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 22px 8px;
+  }
+  .company-row dt {
+    font-weight: 600;
+    color: #0f172a;
+    font-size: 0.95rem;
+  }
+  .company-row dd {
+    color: #334155;
+    font-size: 0.95rem;
+  }
+  @media (max-width: 768px) {
+    .company-row {
+      grid-template-columns: 1fr;
+      gap: 6px;
+      padding: 18px 4px;
+    }
+  }
+</style>

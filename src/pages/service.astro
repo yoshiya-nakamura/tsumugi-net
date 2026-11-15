@@ -1,0 +1,78 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="事業内容 | 株式会社つむぎネット">
+  <div class="page-header">
+    <div class="container">
+      <span class="en">SERVICE</span>
+      <h1>事業内容</h1>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="detail-list">
+        <article class="detail-item">
+          <span class="num">SERVICE 01</span>
+          <h2>Webシステム・コーポレートサイト企画開発</h2>
+          <p>
+            企業の信頼性を高めるコーポレートサイトやLPの制作から、業務効率を高めるWebアプリケーションの開発まで一貫して手がけています。表示速度・セキュリティ・保守性に優れたモダンな技術構成を採用し、長期にわたり安心して運用できる基盤を構築します。
+          </p>
+        </article>
+
+        <article class="detail-item">
+          <span class="num">SERVICE 02</span>
+          <h2>IT・DX推進コンサルティング</h2>
+          <p>
+            クラウドツールの導入選定、バックオフィス業務の自動化、生成AIの業務組み込みなど、小規模法人・スタートアップの現場に即した実践的なIT支援を行います。過剰な投資を避け、費用対効果の高いシンプルな仕組みをご提案します。
+          </p>
+        </article>
+
+        <article class="detail-item">
+          <span class="num">SERVICE 03</span>
+          <h2>自社デジタルプロダクト・メディア運営</h2>
+          <p>
+            日々の業務や暮らしを少し便利にするWebサービス・デジタルコンテンツの企画、開発および運営を行っています。
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .detail-list {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+  .detail-item {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 36px;
+  }
+  .num {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #1d4ed8;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .detail-item h2 {
+    font-size: 1.35rem;
+    color: #0f172a;
+    margin-bottom: 14px;
+  }
+  .detail-item p {
+    color: #475569;
+    font-size: 0.98rem;
+  }
+  @media (max-width: 768px) {
+    .detail-item {
+      padding: 24px;
+    }
+  }
+</style>

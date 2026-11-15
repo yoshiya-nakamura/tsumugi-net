@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const newsList = [
+  {
+    date: "2026.11.15",
+    category: "お知らせ",
+    title: "公式コーポレートサイトを公開いたしました。",
+    body: "平素は格別のご高配を賜り、厚く御礼申し上げます。この度、株式会社つむぎネットの公式コーポレートサイトを公開いたしました。今後とも変わらぬご愛顧を賜りますようお願い申し上げます。",
+  },
+  {
+    date: "2026.11.01",
+    category: "プレス",
+    title: "株式会社つむぎネットを設立いたしました。",
+    body: "2026年11月1日をもちまして、株式会社つむぎネットを設立いたしましたことをご報告申し上げます。",
+  },
+];
+---
+
+<Layout title="Information（お知らせ） | 株式会社つむぎネット">
+  <div class="page-header">
+    <div class="container">
+      <span class="en">INFORMATION</span>
+      <h1>お知らせ</h1>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="news-archive">
+        {newsList.map((item) => (
+          <article class="news-card">
+            <div class="news-meta">
+              <time>{item.date}</time>
+              <span class="badge">{item.category}</span>
+            </div>
+            <h2>{item.title}</h2>
+            <p>{item.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .news-archive {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .news-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 28px 32px;
+  }
+  .news-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .news-meta time {
+    font-size: 0.9rem;
+    color: #64748b;
+  }
+  .badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 2px 10px;
+    border-radius: 4px;
+  }
+  .news-card h2 {
+    font-size: 1.2rem;
+    color: #0f172a;
+    margin-bottom: 10px;
+  }
+  .news-card p {
+    font-size: 0.95rem;
+    color: #475569;
+  }
+</style>
