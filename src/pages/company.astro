@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="会社概要 | 株式会社つむぎネット">
+<Layout title="会社概要 | つむぎネットワークス合同会社">
   <div class="page-header">
     <div class="container">
       <span class="en">COMPANY</span>
@@ -15,28 +15,34 @@ import Layout from "../layouts/Layout.astro";
       <dl class="company-list">
         <div class="company-row">
           <dt>会社名</dt>
-          <dd>株式会社つむぎネット</dd>
+          <dd>つむぎネットワークス合同会社</dd>
         </div>
         <div class="company-row">
           <dt>設立</dt>
           <dd>2026年11月</dd>
         </div>
         <div class="company-row">
-          <dt>代表者</dt>
-          <dd>代表取締役 〇〇 〇〇</dd>
+          <dt>代表社員</dt>
+          <dd>
+            <img src="/owner.png" alt="" class="protected-img" />
+          </dd>
         </div>
         <div class="company-row">
-          <dt>所在地</dt>
-          <dd>〒810-0001 福岡県福岡市中央区〇〇 1-2-3</dd>
+          <dt>電話番号</dt>
+          <dd>
+            <img src="/tel.png" alt="" class="protected-img" />
+          </dd>
         </div>
         <div class="company-row">
-          <dt>資本金</dt>
-          <dd>〇〇〇万円</dd>
+          <dt>住所</dt>
+          <dd>
+            福岡県福津市
+          </dd>
         </div>
         <div class="company-row">
           <dt>事業内容</dt>
           <dd>
-            1. Webサイト・Webシステムの企画、設計、開発及び運営<br />
+            1. ネットワークインフラ全般 (ご提案・選定/設計/構築等)<br />
             2. IT・DX推進に関するコンサルティング業務<br />
             3. デジタルコンテンツの企画、制作及び販売
           </dd>
@@ -72,6 +78,16 @@ import Layout from "../layouts/Layout.astro";
   .company-row dd {
     color: #334155;
     font-size: 0.95rem;
+  }
+  .protected-img {
+    height: 20px;
+    width: auto;
+    display: inline-block;
+    vertical-align: -2px; /* 縦位置の微調整 */
+    mix-blend-mode: multiply; /* 画像の白背景を馴染ませる */
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
   }
   @media (max-width: 768px) {
     .company-row {

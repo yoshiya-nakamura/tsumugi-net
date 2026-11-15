@@ -2,11 +2,13 @@
 interface Props {
   title: string;
   description?: string;
+  noindex?: boolean;
 }
 
 const {
   title,
   description = "つむぎネットワークス合同会社の公式コーポレートサイトです。",
+  noindex = false,
 } = Astro.props;
 ---
 
@@ -17,14 +19,14 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
   </head>
   <body>
     <!-- 共通ヘッダー -->
     <header class="header">
       <div class="container header-inner">
         <a href="/" class="logo">
-          <span class="logo-mark"></span>
-          つむぎネットワークス
+          <img src="/corporate-logo.jpg" alt="つむぎネットワークス合同会社" class="header-logo-img" />
         </a>
 
         <!-- PC用ナビゲーション -->
@@ -95,7 +97,9 @@ const {
     <!-- 共通フッター -->
     <footer class="footer">
       <div class="container footer-inner">
-        <a href="/" class="footer-logo">TSUMUGI NETWORKS LLC.</a>
+        <a href="/" class="footer-logo-wrap">
+          <img src="/corporate-logo.jpg" alt="つむぎネットワークス合同会社" class="footer-logo-img" />
+        </a>
         <div class="footer-links">
           <a href="/service">事業内容</a>
           <a href="/info">Information</a>
@@ -129,7 +133,6 @@ const {
         menuToggle.setAttribute("aria-expanded", String(Boolean(isOpen)));
       });
 
-      // スマホメニュー内のリンクを押したら自動で閉じる
       spNav?.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", () => {
           spNav.classList.remove("is-open");
@@ -178,22 +181,15 @@ const {
   .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #0f172a;
     text-decoration: none;
-    letter-spacing: 0.04em;
-    white-space: nowrap;
   }
-  .logo-mark {
-    width: 12px;
-    height: 12px;
-    background: #1d4ed8;
-    border-radius: 2px;
-    display: inline-block;
-    flex-shrink: 0;
+  .header-logo-img {
+    height: 36px; /* ロゴの見た目に合わせて 32px〜44px の間で微調整してください */
+    width: auto;
+    display: block;
+    object-fit: contain;
   }
+
   .pc-nav {
     display: flex;
     align-items: center;
@@ -432,11 +428,19 @@ const {
     flex-wrap: wrap;
     gap: 16px;
   }
-  .footer-logo {
-    color: #ffffff;
-    font-weight: 700;
-    letter-spacing: 0.06em;
+  .footer-logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    background: #ffffff;
+    padding: 6px 12px;
+    border-radius: 6px;
     text-decoration: none;
+  }
+  .footer-logo-img {
+    height: 28px;
+    width: auto;
+    display: block;
+    object-fit: contain;
   }
   .footer-links {
     display: flex;
@@ -458,8 +462,8 @@ const {
     .header-inner {
       height: 60px;
     }
-    .logo {
-      font-size: 1rem;
+    .header-logo-img {
+      height: 30px;
     }
     .pc-nav {
       display: none;
