@@ -8,7 +8,7 @@ interface Props {
 const {
   title,
   description = "つむぎネットワークス合同会社の公式コーポレートサイトです。",
-  noindex = false,
+  noindex = true,
 } = Astro.props;
 ---
 
@@ -32,7 +32,7 @@ const {
         <!-- PC用ナビゲーション -->
         <nav class="nav pc-nav">
           <a href="/service">事業内容</a>
-          <a href="/info">Information</a>
+          <a href="/info">お知らせ</a>
           <a href="/company">会社概要</a>
           <a href="#contact" class="nav-cta">お問い合わせ</a>
         </nav>
@@ -55,7 +55,7 @@ const {
       <nav id="sp-nav" class="sp-nav">
         <a href="/">トップページ</a>
         <a href="/service">事業内容</a>
-        <a href="/info">Information</a>
+        <a href="/info">お知らせ</a>
         <a href="/company">会社概要</a>
         <a href="#contact" class="sp-nav-cta">お問い合わせ</a>
       </nav>
@@ -102,7 +102,7 @@ const {
         </a>
         <div class="footer-links">
           <a href="/service">事業内容</a>
-          <a href="/info">Information</a>
+          <a href="/info">お知らせ</a>
           <a href="/company">会社概要</a>
         </div>
         <p class="copyright">&copy; {new Date().getFullYear()} TSUMUGI NETWORKS LLC. All Rights Reserved.</p>
