@@ -26,21 +26,45 @@ const {
           <span class="logo-mark"></span>
           つむぎネットワークス
         </a>
-        <nav class="nav">
+
+        <!-- PC用ナビゲーション -->
+        <nav class="nav pc-nav">
           <a href="/service">事業内容</a>
           <a href="/info">Information</a>
           <a href="/company">会社概要</a>
           <a href="#contact" class="nav-cta">お問い合わせ</a>
         </nav>
+
+        <!-- スマホ用ハンバーガーボタン -->
+        <button
+          type="button"
+          id="menu-toggle"
+          class="menu-toggle"
+          aria-label="メニューを開く"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
+
+      <!-- スマホ用ドロワーメニュー -->
+      <nav id="sp-nav" class="sp-nav">
+        <a href="/">トップページ</a>
+        <a href="/service">事業内容</a>
+        <a href="/info">Information</a>
+        <a href="/company">会社概要</a>
+        <a href="#contact" class="sp-nav-cta">お問い合わせ</a>
+      </nav>
     </header>
 
-    <!-- 各ページの中身がここに入る -->
+    <!-- 各ページの中身 -->
     <main>
       <slot />
     </main>
 
-<!-- 共通お問い合わせエリア -->
+    <!-- 共通お問い合わせエリア -->
     <section id="contact" class="contact-section">
       <div class="container contact-inner">
         <span class="en light">CONTACT</span>
@@ -68,24 +92,10 @@ const {
       </div>
     </section>
 
-    <script>
-      const copyBtn = document.getElementById("copy-btn");
-      const emailText = document.getElementById("contact-email")?.textContent;
-
-      copyBtn?.addEventListener("click", async () => {
-        if (!emailText) return;
-        await navigator.clipboard.writeText(emailText);
-        copyBtn.textContent = "コピーしました！";
-        setTimeout(() => {
-          copyBtn.textContent = "コピー";
-        }, 2000);
-      });
-    </script>
-
     <!-- 共通フッター -->
     <footer class="footer">
       <div class="container footer-inner">
-        <a href="/" class="footer-logo">TSUMUGI NETWROKS LLC.</a>
+        <a href="/" class="footer-logo">TSUMUGI NETWORKS LLC.</a>
         <div class="footer-links">
           <a href="/service">事業内容</a>
           <a href="/info">Information</a>
@@ -94,6 +104,40 @@ const {
         <p class="copyright">&copy; {new Date().getFullYear()} TSUMUGI NETWORKS LLC. All Rights Reserved.</p>
       </div>
     </footer>
+
+    <script>
+      // メールコピー機能
+      const copyBtn = document.getElementById("copy-btn");
+      const emailText = document.getElementById("contact-email")?.textContent;
+
+      copyBtn?.addEventListener("click", async () => {
+        if (!emailText) return;
+        await navigator.clipboard.writeText(emailText);
+        copyBtn.textContent = "コピー完了！";
+        setTimeout(() => {
+          copyBtn.textContent = "コピー";
+        }, 2000);
+      });
+
+      // スマホ用ハンバーガーメニュー開閉
+      const menuToggle = document.getElementById("menu-toggle");
+      const spNav = document.getElementById("sp-nav");
+
+      menuToggle?.addEventListener("click", () => {
+        const isOpen = spNav?.classList.toggle("is-open");
+        menuToggle.classList.toggle("is-active");
+        menuToggle.setAttribute("aria-expanded", String(Boolean(isOpen)));
+      });
+
+      // スマホメニュー内のリンクを押したら自動で閉じる
+      spNav?.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          spNav.classList.remove("is-open");
+          menuToggle?.classList.remove("is-active");
+          menuToggle?.setAttribute("aria-expanded", "false");
+        });
+      });
+    </script>
   </body>
 </html>
 
@@ -121,7 +165,7 @@ const {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid #e2e8f0;
   }
@@ -136,10 +180,11 @@ const {
     align-items: center;
     gap: 10px;
     font-weight: 700;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: #0f172a;
     text-decoration: none;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
   }
   .logo-mark {
     width: 12px;
@@ -147,20 +192,21 @@ const {
     background: #1d4ed8;
     border-radius: 2px;
     display: inline-block;
+    flex-shrink: 0;
   }
-  .nav {
+  .pc-nav {
     display: flex;
     align-items: center;
     gap: 28px;
     font-size: 0.9rem;
     font-weight: 500;
   }
-  .nav a {
+  .pc-nav a {
     color: #475569;
     text-decoration: none;
     transition: color 0.2s;
   }
-  .nav a:hover {
+  .pc-nav a:hover {
     color: #1d4ed8;
   }
   .nav-cta {
@@ -171,6 +217,62 @@ const {
   }
   .nav-cta:hover {
     background: #1d4ed8;
+  }
+
+  /* スマホ用メニュー（PCでは非表示） */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+  .menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #0f172a;
+    transition: transform 0.25s, opacity 0.25s;
+  }
+  .menu-toggle.is-active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .menu-toggle.is-active span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.is-active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  .sp-nav {
+    display: none;
+    flex-direction: column;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 12px 24px 24px;
+  }
+  .sp-nav.is-open {
+    display: flex;
+  }
+  .sp-nav a {
+    padding: 14px 4px;
+    color: #1e293b;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .sp-nav a.sp-nav-cta {
+    margin-top: 14px;
+    background: #0f172a;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 6px;
+    border-bottom: none;
+    font-weight: 600;
   }
 
   /* 下層ページ共通ヘッダー */
@@ -243,8 +345,48 @@ const {
   }
   .contact-inner p {
     color: #cbd5e1;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
     font-size: 0.95rem;
+  }
+  .mail-copy-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 14px 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    max-width: 100%;
+  }
+  .email-text {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    word-break: break-all;
+  }
+  .copy-btn {
+    background: #1d4ed8;
+    color: #ffffff;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 5px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .copy-btn:hover {
+    background: #2563eb;
+  }
+  .contact-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
   }
   .contact-btn {
     display: inline-block;
@@ -252,13 +394,28 @@ const {
     color: #0f172a;
     font-weight: 700;
     text-decoration: none;
-    padding: 16px 36px;
+    padding: 14px 28px;
     border-radius: 6px;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     transition: background 0.2s;
   }
   .contact-btn:hover {
     background: #eff6ff;
+  }
+  .contact-btn-sub {
+    display: inline-block;
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    font-weight: 600;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    transition: background 0.2s;
+  }
+  .contact-btn-sub:hover {
+    background: rgba(255, 255, 255, 0.1);
   }
 
   /* フッター */
@@ -293,19 +450,58 @@ const {
     color: #ffffff;
   }
 
+  /* スマホ表示（768px以下） */
   @media (max-width: 768px) {
-    .nav {
-      gap: 14px;
-      font-size: 0.82rem;
+    .container {
+      padding: 0 18px;
     }
-    .nav-cta {
+    .header-inner {
+      height: 60px;
+    }
+    .logo {
+      font-size: 1rem;
+    }
+    .pc-nav {
       display: none;
     }
+    .menu-toggle {
+      display: flex;
+    }
+    .section {
+      padding: 56px 0;
+    }
+    .section-head {
+      margin-bottom: 28px;
+    }
+    .section-head h2 {
+      font-size: 1.4rem;
+    }
     .page-header {
-      padding: 48px 0 40px;
+      padding: 44px 0 36px;
     }
     .page-header h1 {
-      font-size: 1.6rem;
+      font-size: 1.55rem;
+    }
+    .contact-section {
+      padding: 60px 0;
+    }
+    .contact-inner h2 {
+      font-size: 1.45rem;
+    }
+    .mail-copy-box {
+      width: 100%;
+      padding: 10px 12px 10px 14px;
+    }
+    .email-text {
+      font-size: 0.9rem;
+    }
+    .contact-actions {
+      flex-direction: column;
+    }
+    .contact-btn,
+    .contact-btn-sub {
+      width: 100%;
+      text-align: center;
     }
     .footer-inner {
       flex-direction: column;
