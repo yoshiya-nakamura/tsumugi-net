@@ -1,23 +1,315 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "つむぎネットワークス合同会社の公式コーポレートサイトです。",
+} = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <!-- 共通ヘッダー -->
+    <header class="header">
+      <div class="container header-inner">
+        <a href="/" class="logo">
+          <span class="logo-mark"></span>
+          つむぎネットワークス
+        </a>
+        <nav class="nav">
+          <a href="/service">事業内容</a>
+          <a href="/info">Information</a>
+          <a href="/company">会社概要</a>
+          <a href="#contact" class="nav-cta">お問い合わせ</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- 各ページの中身がここに入る -->
+    <main>
+      <slot />
+    </main>
+
+<!-- 共通お問い合わせエリア -->
+    <section id="contact" class="contact-section">
+      <div class="container contact-inner">
+        <span class="en light">CONTACT</span>
+        <h2>お問い合わせ</h2>
+        <p>事業に関するご相談・お見積りなど、下記窓口よりお気軽にお問い合わせください。</p>
+
+        <div class="mail-copy-box">
+          <span id="contact-email" class="email-text">contact@tsumugi-net.com</span>
+          <button type="button" id="copy-btn" class="copy-btn">コピー</button>
+        </div>
+
+        <div class="contact-actions">
+          <a
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@tsumugi-net.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-btn"
+          >
+            Gmailで問い合わせる
+          </a>
+          <a href="mailto:contact@tsumugi-net.com" class="contact-btn-sub">
+            メールソフトを起動
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const copyBtn = document.getElementById("copy-btn");
+      const emailText = document.getElementById("contact-email")?.textContent;
+
+      copyBtn?.addEventListener("click", async () => {
+        if (!emailText) return;
+        await navigator.clipboard.writeText(emailText);
+        copyBtn.textContent = "コピーしました！";
+        setTimeout(() => {
+          copyBtn.textContent = "コピー";
+        }, 2000);
+      });
+    </script>
+
+    <!-- 共通フッター -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <a href="/" class="footer-logo">TSUMUGI NETWROKS LLC.</a>
+        <div class="footer-links">
+          <a href="/service">事業内容</a>
+          <a href="/info">Information</a>
+          <a href="/company">会社概要</a>
+        </div>
+        <p class="copyright">&copy; {new Date().getFullYear()} TSUMUGI NETWORKS LLC. All Rights Reserved.</p>
+      </div>
+    </footer>
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    scroll-behavior: smooth;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    color: #1e293b;
+    line-height: 1.75;
+    background-color: #ffffff;
+  }
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ヘッダー */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .header-inner {
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #0f172a;
+    text-decoration: none;
+    letter-spacing: 0.08em;
+  }
+  .logo-mark {
+    width: 12px;
+    height: 12px;
+    background: #1d4ed8;
+    border-radius: 2px;
+    display: inline-block;
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .nav a {
+    color: #475569;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav a:hover {
+    color: #1d4ed8;
+  }
+  .nav-cta {
+    background: #0f172a;
+    color: #ffffff !important;
+    padding: 8px 18px;
+    border-radius: 6px;
+  }
+  .nav-cta:hover {
+    background: #1d4ed8;
+  }
+
+  /* 下層ページ共通ヘッダー */
+  .page-header {
+    padding: 64px 0 52px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .page-header h1 {
+    font-size: 2rem;
+    color: #0f172a;
+    margin-top: 4px;
+  }
+
+  /* セクション共通 */
+  .section {
+    padding: 80px 0;
+  }
+  .bg-light {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .section-head {
+    margin-bottom: 40px;
+  }
+  .en {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #1d4ed8;
+    margin-bottom: 4px;
+  }
+  .section-head h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .more-wrap {
+    margin-top: 32px;
+    text-align: right;
+  }
+  .more-link {
+    display: inline-block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1d4ed8;
+    text-decoration: none;
+  }
+  .more-link:hover {
+    text-decoration: underline;
+  }
+
+  /* お問い合わせ */
+  .contact-section {
+    padding: 80px 0;
+    background: #0f172a;
+    color: #ffffff;
+  }
+  .contact-inner {
+    text-align: center;
+  }
+  .en.light {
+    color: #60a5fa;
+  }
+  .contact-inner h2 {
+    font-size: 1.75rem;
+    margin-bottom: 14px;
+  }
+  .contact-inner p {
+    color: #cbd5e1;
+    margin-bottom: 32px;
+    font-size: 0.95rem;
+  }
+  .contact-btn {
+    display: inline-block;
+    background: #ffffff;
+    color: #0f172a;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 16px 36px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+  }
+  .contact-btn:hover {
+    background: #eff6ff;
+  }
+
+  /* フッター */
+  .footer {
+    background: #090d16;
+    color: #94a3b8;
+    padding: 44px 0;
+    font-size: 0.85rem;
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-logo {
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+  }
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+  .footer-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+  }
+  .footer-links a:hover {
+    color: #ffffff;
+  }
+
+  @media (max-width: 768px) {
+    .nav {
+      gap: 14px;
+      font-size: 0.82rem;
+    }
+    .nav-cta {
+      display: none;
+    }
+    .page-header {
+      padding: 48px 0 40px;
+    }
+    .page-header h1 {
+      font-size: 1.6rem;
+    }
+    .footer-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
 </style>
