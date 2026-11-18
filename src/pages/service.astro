@@ -10,37 +10,54 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </div>
 
-<section class="section">
+  <section class="section">
     <div class="container">
       <div class="detail-list">
         <!-- 事業01：ネットワークインフラ全般 -->
         <article class="detail-item">
           <span class="num">SERVICE 01</span>
-          <h2>ネットワークインフラ全般（ご提案・選定／設計／構築等）</h2>
-          <p>
-            オフィス環境やクラウド連携に不可欠なネットワーク基盤について、要件定義・機器選定から設計、構築、運用支援まで一貫して対応いたします。規模や予算に合わせ、安定性とセキュリティを両立したインフラ環境をご提案します。<br />
-            <br />
-            ネットワーク要件定義・機器選定<br />
-            LAN / Wi-Fi / VPN環境設計・構築<br />
-            セキュリティ対策・機器設定<br />
-            既存ネットワークの見直し・最適化<br />  
+          <h2>ネットワークインフラ設計・構築・運用支援</h2>
+          <p class="lead">
+            数名規模のオフィスや拠点間ネットワークから、高い耐障害性が求められる大規模データセンター（DC）環境まで、要件定義・機器選定・基本／詳細設計・構築・運用設計を一気通貫で支援いたします。導入後の運用保守まで見据えた、シンプルで堅牢なインフラ基盤をご提案します。
           </p>
+
+          <div class="service-box">
+            <h3>主な対応領域</h3>
+            <ul class="check-list">
+              <li>ネットワーク構成の提案・要件定義・機器選定（小規模〜大規模環境まで対応）</li>
+              <li>WAN / LAN / Wi-Fi / 拠点間VPN・閉域網の設計および構築</li>
+              <li>ファイアウォール・SASE・ロードバランサ等のセキュリティ／負荷分散設計</li>
+              <li>既存ネットワークのボトルネック調査・リプレイス・構成レビュー</li>
+              <li>構築作業の自動化（Ansible等）、手順書・パラメータシート作成、運用監視設計</li>
+              <li>通信キャリア・機器ベンダーとの折衝、プロジェクト進行管理（PM・ベンダーコントロール）</li>
+            </ul>
+          </div>
+
+          <div class="tech-stack">
+            <span class="tech-label">対応実績のある主な機器・技術：</span>
+            <p class="tech-items">
+              Cisco（Catalyst / Nexus / ASR / ACI） / YAMAHA（RTXシリーズ） / Fortinet（FortiGate） / F5 BIG-IP / VarioSecure / FITELnet / BGP / OSPF / AWS / Ansible / Linux
+            </p>
+          </div>
         </article>
 
+        <!-- 事業02：IT・DX推進コンサルティング -->
         <article class="detail-item">
           <span class="num">SERVICE 02</span>
           <h2>IT・DX推進コンサルティング</h2>
-          <p>
-            クラウドツールの導入選定、バックオフィス業務の自動化、生成AIの業務組み込みなど、小規模法人・スタートアップの現場に即した実践的なIT支援を行います。過剰な投資を避け、費用対効果の高いシンプルな仕組みをご提案します。
+          <p class="lead">
+            「専任の情シス担当者がいない」「どのツールを選べばいいか分からない」といった小規模法人・スタートアップ様向けに、現場に即した実践的なIT導入・業務効率化を支援します。過剰な設備投資を避け、費用対効果の高い仕組みづくりをご提案します。
           </p>
-        </article>
 
-        <article class="detail-item">
-          <span class="num">SERVICE 03</span>
-          <h2>自社デジタルプロダクト・メディア運営</h2>
-          <p>
-            日々の業務や暮らしを少し便利にするWebサービス・デジタルコンテンツの企画、開発および運営を行っています。
-          </p>
+          <div class="service-box">
+            <h3>主な対応領域</h3>
+            <ul class="check-list">
+              <li>クラウドツール・SaaSの導入選定および社内ネットワークとの連携設計</li>
+              <li>Python・スクリプト・各種自動化ツールを活用した定型業務の省力化</li>
+              <li>業務マニュアル・運用フローの整備による属人化解消とナレッジ定着支援</li>
+              <li>ITベンダー・システム開発会社への発注支援、見積・提案内容のセカンドオピニオン</li>
+            </ul>
+          </div>
         </article>
       </div>
     </div>
@@ -72,13 +89,71 @@ import Layout from "../layouts/Layout.astro";
     color: #0f172a;
     margin-bottom: 14px;
   }
-  .detail-item p {
+  .lead {
     color: #475569;
     font-size: 0.98rem;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+  .service-box {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .service-box:last-child {
+    margin-bottom: 0;
+  }
+  .service-box h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 12px;
+  }
+  .check-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .check-list li {
+    position: relative;
+    padding-left: 1.4em;
+    color: #334155;
+    font-size: 0.94rem;
+    line-height: 1.6;
+  }
+  .check-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #1d4ed8;
+    font-weight: 700;
+  }
+  .tech-stack {
+    border-top: 1px dashed #cbd5e1;
+    padding-top: 16px;
+    font-size: 0.88rem;
+  }
+  .tech-label {
+    display: block;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 4px;
+  }
+  .tech-items {
+    color: #64748b;
+    margin: 0;
+    line-height: 1.6;
   }
   @media (max-width: 768px) {
     .detail-item {
       padding: 24px;
+    }
+    .service-box {
+      padding: 16px;
     }
   }
 </style>

@@ -10,11 +10,11 @@ const latestNews = [
   <!-- ヒーローエリア -->
   <section class="hero">
     <div class="container">
-      <p class="hero-sub">CORPORATE SITE</p>
-      <h1>テクノロジーで、<br class="sp-only" />ビジネスに確かな価値を。</h1>
+      <p class="hero-sub">NETWORK INFRASTRUCTURE &amp; IT CONSULTING</p>
+      <h1>確かなネットワーク技術で、<br class="sp-only" />ビジネス基盤を支える。</h1>
       <p class="hero-desc">
-        つむぎネットワークス合同会社は、シンプルで本質的なITソリューションを通じて<br class="pc-only" />
-        お客様の事業成長と業務効率化を支援します。
+        つむぎネットワークス合同会社は、小規模オフィスから大規模データセンター環境まで、<br class="pc-only" />
+        ネットワークインフラの設計・構築と実践的なIT推進でお客様の事業成長を支援します。
       </p>
     </div>
   </section>
@@ -28,20 +28,24 @@ const latestNews = [
       </div>
       <div class="service-grid">
         <div class="service-card">
-          <div class="service-num">01</div>
-          <h3>ネットワークインフラ全般</h3>
-          <p>オフィスやデータセンターなど、規模問わずネットワークのことならお任せください。</p>
-          <p>多様な環境・規模での経験が豊富なエンジニアが対応します。</p>
+          <div class="service-num">SERVICE 01</div>
+          <h3>ネットワークインフラ設計・構築・運用支援</h3>
+          <p>
+            オフィス・拠点間VPNから大規模DC環境まで、要件定義・機器選定・設計・構築・運用設計を一気通貫で対応します。導入後の運用保守も見据えた堅牢な基盤をご提案します。
+          </p>
+          <p class="card-tags">
+            Cisco / YAMAHA / FortiGate / F5 BIG-IP / AWS / Ansible
+          </p>
         </div>
         <div class="service-card">
-          <div class="service-num">02</div>
+          <div class="service-num">SERVICE 02</div>
           <h3>IT・DX推進コンサルティング</h3>
-          <p>クラウドツールやAI活用など、小規模組織・法人の業務ロスを最適化する仕組みづくりを支援します。</p>
-        </div>
-        <div class="service-card">
-          <div class="service-num">03</div>
-          <h3>デジタルコンテンツ運営</h3>
-          <p>自社メディアおよび各種デジタルプロダクトの企画・開発・運営を行っています。</p>
+          <p>
+            クラウドツール選定、Pythonや自動化ツールによる業務省力化、ITベンダーへの発注支援・セカンドオピニオンなど、小規模法人・スタートアップの現場に即した実践的なIT支援を行います。
+          </p>
+          <p class="card-tags">
+            クラウド導入 / 業務自動化 / 運用フロー整備 / ベンダー折衝支援
+          </p>
         </div>
       </div>
       <div class="more-wrap">
@@ -98,32 +102,45 @@ const latestNews = [
   .hero-desc {
     font-size: 1.05rem;
     color: #475569;
+    line-height: 1.8;
   }
   .service-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
   }
   .service-card {
+    display: flex;
+    flex-direction: column;
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
-    padding: 28px 24px;
+    padding: 32px 28px;
   }
   .service-num {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 700;
+    letter-spacing: 0.1em;
     color: #1d4ed8;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
   .service-card h3 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #0f172a;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
   .service-card p {
-    font-size: 0.92rem;
+    font-size: 0.95rem;
     color: #475569;
+    line-height: 1.75;
+  }
+  .card-tags {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px dashed #e2e8f0;
+    font-size: 0.82rem !important;
+    font-weight: 600;
+    color: #1d4ed8 !important;
   }
   .info-list {
     list-style: none;
